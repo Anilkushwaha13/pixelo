@@ -10,9 +10,9 @@ import java.io.ByteArrayOutputStream;
 import java.util.Iterator;
 
 public class ImageCompressorWithQuality {
-    public static BufferedImage getCompress(BufferedImage img , float quality, String imageFormate) {
+    public static BufferedImage getCompress(BufferedImage img , String imageFormate, double quality) {
         try {
-            return compressImage(img,  quality, imageFormate );
+            return compressImage(img, imageFormate,  quality );
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -20,7 +20,7 @@ public class ImageCompressorWithQuality {
         }
     }
 
-    private static BufferedImage compressImage(BufferedImage img, float quality,String imageFormate) {
+    private static BufferedImage compressImage(BufferedImage img,String imageFormate, double quality) {
         Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName(imageFormate);
         if (!writers.hasNext()){
             throw new IllegalStateException("no "+imageFormate+" writer was found");
@@ -33,7 +33,7 @@ public class ImageCompressorWithQuality {
             writer.setOutput(ios);
             ImageWriteParam param= writer.getDefaultWriteParam();
             param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-            param.setCompressionQuality(quality);
+            param.setCompressionQuality((float) quality);
 
             writer.write(null,new javax.imageio.IIOImage(img, null,null),param);
 

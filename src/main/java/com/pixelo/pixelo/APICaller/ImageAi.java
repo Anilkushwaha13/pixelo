@@ -64,7 +64,7 @@ public class ImageAi {
                 while ((inputLine = in.readLine())  !=null){
                     response.append(inputLine);
                 }
-
+                System.out.println(response);
                 JSONObject data = new JSONObject(response.toString());
                 if(data.has("artifacts")){
                     JSONArray artifacts = data.getJSONArray("artifacts");

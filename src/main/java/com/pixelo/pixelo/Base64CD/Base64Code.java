@@ -25,8 +25,7 @@ public class Base64Code {
     }
 
     public static BufferedImage getDecodeImage(String img) throws Exception{
-        String base64data = img.split(",")[1];
-        byte[] bytes = Base64.getDecoder().decode(base64data);
+        byte[] bytes = Base64.getDecoder().decode(img);
         ByteArrayInputStream bin = new ByteArrayInputStream(bytes);
         BufferedImage image =ImageIO.read(bin);
         return image;

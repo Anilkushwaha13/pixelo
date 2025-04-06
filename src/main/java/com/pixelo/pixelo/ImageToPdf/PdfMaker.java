@@ -35,14 +35,14 @@ public class PdfMaker {
                    base64Images = base64Images.split(",")[1];
                 }
 //                base64Images = base64Images.replaceAll("\\s+", "").trim();
+//                byte[] imageBytes = Base64.decodeBase64(base64Images);
 
                byte[] imageBytes = Base64.getDecoder().decode(base64Images);
-//                byte[] imageBytes = Base64.decodeBase64(base64Images);
                 ImageData image = ImageDataFactory.create(imageBytes);
 
-                if (i>0){
-                    pdfDoc.addNewPage();
-                }
+//                if (i>0){
+//                    pdfDoc.addNewPage();
+//                }
 
                 Image img = new Image(image);
                 System.out.println(img);
