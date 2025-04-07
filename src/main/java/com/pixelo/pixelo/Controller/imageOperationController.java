@@ -1,28 +1,35 @@
 package com.pixelo.pixelo.Controller;
 
-import com.pixelo.pixelo.ImageOperation.ImageCompressor;
 import com.pixelo.pixelo.businessLogic.imageLogic;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/image")
 public class imageOperationController {
 
     @PostMapping("/get-compressed")
-    public ResponseEntity<List<String>> compressImage(@RequestBody ImageRequest request){
+    public ResponseEntity<Map<String, List<String>>> compressImage(@RequestBody ImageRequest request){
 //        List<String> base64Images = request.getImages();
 //        System.out.println("Images received: " + base64Images);
 //        System.out.println(base64Images.size());
         List<String> compressedImage = imageLogic.getCompressedImage(request.getImages());
+        System.out.println(compressedImage);
+
+        Map<String,List<String>> response = new HashMap<>();
+        response.put("Data",compressedImage);
+
 
         return ResponseEntity.ok()
                 .header("X-Total-Images", String.valueOf(compressedImage.size()))
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(compressedImage);
+                .body(response);
     }
 
     @PostMapping("/get-compressed-quality")
