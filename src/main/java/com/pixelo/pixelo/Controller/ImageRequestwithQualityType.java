@@ -1,9 +1,10 @@
 package com.pixelo.pixelo.Controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ImageRequestwithQualityType {
-    private ArrayList<String> images = new ArrayList<>();
+    private List<String> images = new ArrayList<>() ;
     private String qualityOrType ;
 
     public String getQualityOrType() {
@@ -16,7 +17,7 @@ public class ImageRequestwithQualityType {
 
 
 
-    public ArrayList<String> getImages() {
+    public List<String> getImages() {
         return images;
     }
 

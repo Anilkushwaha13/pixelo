@@ -33,31 +33,36 @@ public class imageOperationController {
     }
 
     @PostMapping("/get-compressed-quality")
-    public ResponseEntity<List<String>> compressImageWithQuality(@RequestBody ImageRequestwithQualityType request){
-        List<String> base64Images = request.getImages();
-        System.out.println("Images received: " + base64Images);
-        System.out.println(base64Images.size());
-        System.out.println(request.getQualityOrType());
+    public ResponseEntity<?> compressImageWithQuality(@RequestBody ImageRequestwithQualityType request){
+//        List<String> base64Images = request.getImages();
+//        System.out.println("Images received: " + base64Images);
+//        System.out.println(base64Images.size());
+//        System.out.println(request.getQualityOrType());
         List<String> compressedImageWithQuality1 = imageLogic.getCompressedImageWithQuality(request.getImages(),request.getQualityOrType());
+
+        Map<String,List<String>> response = new HashMap<>();
+        response.put("Images",compressedImageWithQuality1);
 
         return ResponseEntity.ok()
                 .header("X-Total-Images", String.valueOf(compressedImageWithQuality1.size()))
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(compressedImageWithQuality1);
+                .body(response);
     }
 
     @PostMapping("/get-convert")
-    public ResponseEntity<List<String>> convertImage(@RequestBody ImageRequestwithQualityType request){
-        List<String> base64Images = request.getImages();
-        System.out.println("Images received: " + base64Images);
-        System.out.println(base64Images.size());
-        System.out.println(request.getQualityOrType());
+    public ResponseEntity<?> convertImage(@RequestBody ImageRequestwithQualityType request){
+//        List<String> base64Images = request.getImages();
+//        System.out.println("Images received: " + base64Images);
+//        System.out.println(base64Images.size());
+//        System.out.println(request.getQualityOrType());
         List<String> convertImage = imageLogic.getConvert(request.getImages(),request.getQualityOrType());
+        Map<String,List<String>> response = new HashMap<>();
+        response.put("Images",convertImage);
 
         return ResponseEntity.ok()
                 .header("X-Total-Images", String.valueOf(convertImage.size()))
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(convertImage);
+                .body(response);
     }
 
 

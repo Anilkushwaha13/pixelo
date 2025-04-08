@@ -14,20 +14,19 @@ import com.twelvemonkeys.imageio.plugins.webp.WebPImageReaderSpi;
 
 public class ImageTypeConvertor {
     public   static BufferedImage getConvert(BufferedImage img, String convertFormate) {
-        BufferedImage image1 = null;
         ImageIO.scanForPlugins();
         try {
             ByteArrayOutputStream bimge = new ByteArrayOutputStream();
             ImageOutputStream image = ImageIO.createImageOutputStream(bimge);
-
             ImageIO.write(img , convertFormate,image);
             ByteArrayInputStream bimg2 = new ByteArrayInputStream(bimge.toByteArray());
 
-            image1 = ImageIO.read(bimg2);
+            return ImageIO.read(bimg2);
 
         } catch (IOException e) {
             System.out.println("error2 "+e.getMessage());
+            return null ;
         }
-        return image1 ;
+
     }
 }

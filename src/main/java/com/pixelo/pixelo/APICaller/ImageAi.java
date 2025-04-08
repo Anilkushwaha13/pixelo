@@ -10,14 +10,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ImageAi {
     static  final String invoke_url ="https://ai.api.nvidia.com/v1/genai/nvidia/consistory";
     static final String api_key ="Bearer "+"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";
 
-    static ArrayList<String> getImage(String prompt, String imp, String style_prompt, ArrayList<String> scene, String Negative ){
+    static List<String> getImage(String prompt, String imp, String style_prompt, ArrayList<String> scene, String Negative ){
         try {
-            ArrayList<String> imgdata = new ArrayList<>();
+            List<String> imgdata = new ArrayList<>();
 
             JSONObject playload = new JSONObject();
             playload.put("mode", "init");

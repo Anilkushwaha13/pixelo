@@ -1,20 +1,21 @@
 package com.pixelo.pixelo.Controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ImageRequest {
-    private ArrayList<String> images = new ArrayList<>();
+    private List<String> images = new ArrayList<>();
 
     public ImageRequest() {
 
     }
 
-    public ArrayList<String> getImages() {
+    public List<String> getImages() {
         return images;
     }
 
-    public void setImages(ArrayList<String> images) {
+    public void setImages(List<String> images) {
         this.images = images;
     }
 }

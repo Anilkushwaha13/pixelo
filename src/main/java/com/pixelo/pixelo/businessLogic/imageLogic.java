@@ -43,7 +43,7 @@ public class imageLogic {
                 BufferedImage image = Base64Code.getDecodeImage(base64data);
                 try {
 
-                image = ImageCompressorWithQuality.getCompress(image,formateName,Double.parseDouble(Quality));
+                image = ImageCompressorWithQuality.getCompress(image,formateName,Float.parseFloat(Quality));
                 result.add(Base64Code.getEncodeImage(image,formateName));
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
