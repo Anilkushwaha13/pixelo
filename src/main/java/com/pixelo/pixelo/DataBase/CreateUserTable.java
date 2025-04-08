@@ -16,13 +16,13 @@ public class CreateUserTable {
                     + "email VARCHAR(200) PRIMARY KEY,  "
                     + "name VARCHAR(200), "
                     + "mobileNumber VARCHAR(50), "
-                    + "password VARCHAR(50), ");
+                    + "password VARCHAR(50)) ");
 
             if (createResult == 0) {  // executeUpdate() returns 0 for DDL statements
                 JOptionPane.showMessageDialog(null, "Table created successfully");
             }
 
-            //  Drop table (if needed)
+//              Drop table (if needed)
 //            int dropResult = firstState.executeUpdate("DROP TABLE appuser;");
 //            if (dropResult == 0) {
 //                JOptionPane.showMessageDialog(null, "Table dropped successfully");
