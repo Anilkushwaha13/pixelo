@@ -11,26 +11,44 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ImageAi {
     static  final String invoke_url ="https://ai.api.nvidia.com/v1/genai/nvidia/consistory";
-    static final String api_key ="Bearer "+"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";
+//    static final String api_key ="Bearer "+"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";
+      static final String api_key ="Bearer "+"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";
 
-    static List<String> getImage(String prompt, String imp, String style_prompt, ArrayList<String> scene, String Negative ){
+//    static List<String> getImage(String prompt, String imp, String style_prompt, ArrayList<String> scene, String Negative ){
+      public   static List<String> getImage(){
         try {
             List<String> imgdata = new ArrayList<>();
 
+//            JSONObject playload = new JSONObject();
+//            playload.put("mode", "init");
+//            playload.put("subject_prompt", prompt.toLowerCase());
+//            playload.put("subject_tokens", new JSONArray().put("anime").put("character").put(imp.toLowerCase()));
+//            playload.put("subject_seed",  6174);  // Kaprekar’s Constant (6174)
+//            playload.put("style_prompt", style_prompt.toLowerCase());
+//            playload.put("scene_prompt1", scene.get(0).toLowerCase());
+//            playload.put("scene_prompt2", scene.get(1).toLowerCase());
+//            playload.put("negative_prompt", Negative.toLowerCase());
+//            playload.put("cfg_scale", 5);
+//            playload.put("same_initial_noise", false);
+
+            Random rand = new Random();
+
             JSONObject playload = new JSONObject();
             playload.put("mode", "init");
-            playload.put("subject_prompt", prompt.toLowerCase());
-            playload.put("subject_tokens", new JSONArray().put("anime").put("character").put(imp.toLowerCase()));
-            playload.put("subject_seed",  6174);  // Kaprekar’s Constant (6174)
-            playload.put("style_prompt", style_prompt.toLowerCase());
-            playload.put("scene_prompt1", scene.get(0).toLowerCase());
-            playload.put("scene_prompt2", scene.get(1).toLowerCase());
-            playload.put("negative_prompt", Negative.toLowerCase());
+            playload.put("subject_prompt", "an Anime character goku ");
+            playload.put("subject_tokens", new JSONArray().put("Anime").put("character").put("goku"));
+            playload.put("subject_seed",rand.nextInt(10000));
+            playload.put("style_prompt", "A photo of");
+            playload.put("scene_prompt1", "fighting scene");
+            playload.put("scene_prompt2", "walking in mountains");
+            playload.put("negative_prompt", "");
             playload.put("cfg_scale", 5);
             playload.put("same_initial_noise", false);
+            System.out.println("Final Payload: " + playload.toString(4));
 
             HttpURLConnection connection = (HttpURLConnection) new URL(invoke_url).openConnection();
             connection.setRequestMethod("POST");

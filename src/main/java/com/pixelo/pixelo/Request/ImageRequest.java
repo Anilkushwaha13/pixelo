@@ -1,4 +1,4 @@
-package com.pixelo.pixelo.Controller;
+package com.pixelo.pixelo.Request;
 
 import java.util.ArrayList;
 import java.util.List;

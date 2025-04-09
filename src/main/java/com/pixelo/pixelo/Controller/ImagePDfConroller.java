@@ -1,6 +1,7 @@
 package com.pixelo.pixelo.Controller;
 
 import com.pixelo.pixelo.ImageToPdf.PdfMaker;
+import com.pixelo.pixelo.Request.ImageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

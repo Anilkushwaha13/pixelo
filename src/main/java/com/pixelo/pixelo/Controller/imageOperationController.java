@@ -1,5 +1,7 @@
 package com.pixelo.pixelo.Controller;
 
+import com.pixelo.pixelo.Request.ImageRequest;
+import com.pixelo.pixelo.Request.ImageRequestwithQualityType;
 import com.pixelo.pixelo.businessLogic.imageLogic;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +35,7 @@ public class imageOperationController {
     }
 
     @PostMapping("/get-compressed-quality")
-    public ResponseEntity<?> compressImageWithQuality(@RequestBody ImageRequestwithQualityType request){
+    public ResponseEntity<Map<String,List<String>>> compressImageWithQuality(@RequestBody ImageRequestwithQualityType request){
 //        List<String> base64Images = request.getImages();
 //        System.out.println("Images received: " + base64Images);
 //        System.out.println(base64Images.size());
@@ -50,7 +52,7 @@ public class imageOperationController {
     }
 
     @PostMapping("/get-convert")
-    public ResponseEntity<?> convertImage(@RequestBody ImageRequestwithQualityType request){
+    public ResponseEntity<Map<String,List<String>>> convertImage(@RequestBody ImageRequestwithQualityType request){
 //        List<String> base64Images = request.getImages();
 //        System.out.println("Images received: " + base64Images);
 //        System.out.println(base64Images.size());

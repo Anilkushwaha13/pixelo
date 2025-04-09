@@ -1,4 +1,4 @@
-package com.pixelo.pixelo.Controller;
+package com.pixelo.pixelo.Request;
 
 public class UserRequest {
     private String UserName;

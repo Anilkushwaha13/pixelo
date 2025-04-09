@@ -1,10 +1,7 @@
-package com.pixelo.pixelo.businessLogic;
-
-import com.pixelo.pixelo.DataBase.ConnectionProvider;
+package com.pixelo.pixelo.DataBase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 
 public class DatabaseUpdate {
 
@@ -43,9 +40,42 @@ public class DatabaseUpdate {
 
         }
     }
+    public static Boolean getUpdate(String email ,String Username){
 
-//    public static void main(String[] args) {
-//        Boolean register= getRegister("as123@gmail.com","Abhi","5456464","4646654dfg");
-//        System.out.println(register);
-//    }
+        Connection con = null;
+        PreparedStatement input = null;
+        try {
+             con = ConnectionProvider.getCon();
+             String sql = "Update  appuser name=? Where email=?)";
+             input = con.prepareStatement(sql);
+             input.setString(1,Username);
+             input.setString(2,email);
+
+            int result = input.executeUpdate();
+
+            if(result == 0){
+                return true;
+            }
+            else return false;
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                input.close();
+                con.close();
+
+
+            } catch (Exception e) {
+                System.out.println(e);
+                System.out.println(System.currentTimeMillis());
+            }
+
+        }
+    }
+
+    public static void main(String[] args) {
+        Boolean register= getRegister("as123@gmail.com","Abhi","5456464","4646654dfg");
+        System.out.println(register);
+    }
 }
