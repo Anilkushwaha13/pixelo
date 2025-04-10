@@ -18,9 +18,6 @@ public class imageOperationController {
 
     @PostMapping("/get-compressed")
     public ResponseEntity<Map<String, List<String>>> compressImage(@RequestBody ImageRequest request){
-//        List<String> base64Images = request.getImages();
-//        System.out.println("Images received: " + base64Images);
-//        System.out.println(base64Images.size());
         List<String> compressedImage = imageLogic.getCompressedImage(request.getImages());
         System.out.println(compressedImage);
 
@@ -36,10 +33,6 @@ public class imageOperationController {
 
     @PostMapping("/get-compressed-quality")
     public ResponseEntity<Map<String,List<String>>> compressImageWithQuality(@RequestBody ImageRequestwithQualityType request){
-//        List<String> base64Images = request.getImages();
-//        System.out.println("Images received: " + base64Images);
-//        System.out.println(base64Images.size());
-//        System.out.println(request.getQualityOrType());
         List<String> compressedImageWithQuality1 = imageLogic.getCompressedImageWithQuality(request.getImages(),request.getQualityOrType());
 
         Map<String,List<String>> response = new HashMap<>();
@@ -53,10 +46,6 @@ public class imageOperationController {
 
     @PostMapping("/get-convert")
     public ResponseEntity<Map<String,List<String>>> convertImage(@RequestBody ImageRequestwithQualityType request){
-//        List<String> base64Images = request.getImages();
-//        System.out.println("Images received: " + base64Images);
-//        System.out.println(base64Images.size());
-//        System.out.println(request.getQualityOrType());
         List<String> convertImage = imageLogic.getConvert(request.getImages(),request.getQualityOrType());
         Map<String,List<String>> response = new HashMap<>();
         response.put("Images",convertImage);

@@ -12,12 +12,17 @@ public class CreateUserTable {
         try {
             con = ConnectionProvider.getCon();
             firstState = con.createStatement();
-            int createResult = firstState.executeUpdate("CREATE TABLE appuser ("
-                    + "email VARCHAR(200) PRIMARY KEY,  "
-                    + "name VARCHAR(200), "
-                    + "mobileNumber VARCHAR(50) Unique, "
-                    + "password VARCHAR(50) "+
-                    "token Varchar(50)");
+            int createResult = firstState.executeUpdate("CREATE TABLE imageai (" +
+                    "    email VARCHAR(200)," +
+                    "    imagedata LONGBLOB," +
+                    "    CONSTRAINT fk_email FOREIGN KEY (email) REFERENCES appusers(email)" +
+                    ");");
+//            int createResult = firstState.executeUpdate("CREATE TABLE appuser ("
+//                    + "email VARCHAR(200) PRIMARY KEY,  "
+//                    + "name VARCHAR(200), "
+//                    + "mobileNumber VARCHAR(50) Unique, "
+//                    + "password VARCHAR(50) "+
+//                    "token Varchar(50)");
 
             if (createResult == 0) {  // executeUpdate() returns 0 for DDL statements
                 JOptionPane.showMessageDialog(null, "Table created successfully");

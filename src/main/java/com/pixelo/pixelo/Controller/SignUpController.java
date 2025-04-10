@@ -33,7 +33,7 @@ public class SignUpController {
         System.out.println(request.getPassword());
         Boolean registration = DatabaseUpdate.getUpdate(request.getEmail(), request.getPassword());
         return ResponseEntity.ok()
-                .header("Register","Successful")
+                .header("Change","Successful")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(registration);
     }
