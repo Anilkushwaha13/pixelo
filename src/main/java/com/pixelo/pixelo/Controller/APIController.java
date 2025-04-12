@@ -1,7 +1,7 @@
 package com.pixelo.pixelo.Controller;
 
 
-import com.pixelo.pixelo.APICaller.ImageAi;
+import com.pixelo.pixelo.APICaller.ImageAi2;
 import com.pixelo.pixelo.APICaller.ImageReaderAi;
 import com.pixelo.pixelo.Request.AIRequestBody;
 import com.pixelo.pixelo.Request.ImageAiRequestBody;
@@ -20,9 +20,10 @@ public class APIController {
     @GetMapping("/getImage")
     public static ResponseEntity<?> getAiImage(@RequestBody AIRequestBody request){
 
-        List<String> image = ImageAi.getImage(request.getPrompt(),request.getImp(),request.getStyle_prompt(),request.getScene(),request.getNegative());
+        List<String> image = ImageAi2.getImage(request.getPrompt(),request.getImp(),request.getStyle_prompt(),request.getScene(),request.getNegative());
         Map<String,List<String>> response = new HashMap<>();
         response.put("Images",image);
+        System.out.println(response);
 
         return ResponseEntity.ok()
                 .header("X-Total-Images", String.valueOf(image.size()))
@@ -35,6 +36,7 @@ public class APIController {
         List<String> image = ImageReaderAi.getImageData(request.getImageData(), request.getMessage());
         Map<String,List<String>> response = new HashMap<>();
         response.put("Images",image);
+        System.out.println(response);
 
         return ResponseEntity.ok()
                 .header("X-Total-Images", String.valueOf(image.size()))
