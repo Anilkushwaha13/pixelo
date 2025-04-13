@@ -9,32 +9,35 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class ImageAi2 {
-    static  final String invoke_url ="https://ai.api.nvidia.com/v1/genai/nvidia/consistory";
+    static  final String invoke_url ="https://ai.api.nvidia.com/v1/genai/stabilityai/stable-diffusion-xl";
     //    static final String api_key ="Bearer "+"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";
-    static final String api_key ="Bearer "+"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";
+    static final String api_key ="Bearer "+"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";
 
-    public static List<String> getImage(String prompt, ArrayList<String> imp, String style_prompt, ArrayList<String> scene, String Negative ){
+    public static List<String> getImage2(String prompt){
         try {
             List<String> imgdata = new ArrayList<>();
 
             Random rand = new Random();
 
+            Map<String, Object> content = new HashMap<>();
+            content.put("text", prompt);
+            content.put("weight", 1.0);  // send as a double
+
+            Map<String, Object> content2 = new HashMap<>();
+            content2.put("text", "");
+            content2.put("weight", -1.0);  // send as a double
+
             JSONObject playload = new JSONObject();
-            playload.put("text", "init");
-            playload.put("subject_prompt", prompt.toLowerCase());
-            playload.put("subject_tokens", new JSONArray().put(imp.get(0).toLowerCase()).put(imp.get(1).toLowerCase()).put(imp.get(2).toLowerCase()));
-            playload.put("subject_seed",  rand.nextInt(10000));  // Kaprekar’s Constant (6174)
-            playload.put("style_prompt", style_prompt.toLowerCase());
-            playload.put("scene_prompt1", scene.get(0).toLowerCase());
-            playload.put("scene_prompt2", scene.get(1).toLowerCase());
-            playload.put("negative_prompt", Negative.toLowerCase());
+            playload.put("text_prompts", new JSONArray().put(new JSONObject(content)).put(new JSONObject(content2)));
+            playload.put("seed", rand.nextInt(10000));
+            playload.put("sampler", "K_DPM_2_ANCESTRAL");
             playload.put("cfg_scale", 5);
-            playload.put("same_initial_noise", false);
+            playload.put("steps", 50);
+
+            System.out.println(playload);
 
 
             HttpURLConnection connection = (HttpURLConnection) new URL(invoke_url).openConnection();
@@ -90,5 +93,9 @@ public class ImageAi2 {
             return null;
         }
 
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getImage2("virat kohli,ghibli art"));
     }
 }

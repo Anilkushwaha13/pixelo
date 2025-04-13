@@ -101,7 +101,7 @@ public static List<String> getImageData(String Image, String message) {
             byte[] bytes = bose.toByteArray();
             String Image1 = Base64.getEncoder().encodeToString(bytes);
             String encodedImage="data:image/"+"jpeg"+";base64,"+Image1;
-            List<String> string = getImageData(encodedImage,"what is this");
+            List<String> string = getImageData("https://i.ibb.co/N2D0PQLt/61b1314fe20c.jpg","");
             System.out.println(string);
         } catch (Exception e) {
             throw new RuntimeException(e);
