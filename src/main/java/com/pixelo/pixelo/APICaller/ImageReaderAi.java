@@ -15,7 +15,7 @@ public class ImageReaderAi {
     static  final String invoke_url ="https://integrate.api.nvidia.com/v1/chat/completions";
     //    static final String api_key ="Bearer "+"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";
     static final String api_key ="Bearer "+"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";
-public static List<String> getImageData(String Image, String message) {
+public static String getImageData(String Image, String message) {
     try {
         String content = message + "<img src=\""+Image+"\" />";
 
@@ -76,12 +76,11 @@ public static List<String> getImageData(String Image, String message) {
                     }
                 }
 
-                System.out.println("Final content from model:");
-                System.out.println(finalContent.toString());
-                List<String> result = new ArrayList<>();
-                result.add(finalContent.toString());
+//                System.out.println("Final content from model:");
+//                System.out.println(finalContent.toString());
 
-                return result;
+            return finalContent.toString();
+
             }
         }
 
@@ -93,20 +92,20 @@ public static List<String> getImageData(String Image, String message) {
 }
 
 
-    public static void main(String[] args) {
-        try {
-            BufferedImage image = ImageIO.read(new File("C:/Users/kushw/Downloads/concept-art-sunset-city.jpg"));
-            ByteArrayOutputStream bose = new ByteArrayOutputStream();
-            ImageIO.write(image,"jpeg",bose);
-            byte[] bytes = bose.toByteArray();
-            String Image1 = Base64.getEncoder().encodeToString(bytes);
-            String encodedImage="data:image/"+"jpeg"+";base64,"+Image1;
-            List<String> string = getImageData("https://i.ibb.co/N2D0PQLt/61b1314fe20c.jpg","");
-            System.out.println(string);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-    }
+//    public static void main(String[] args) {
+//        try {
+//            BufferedImage image = ImageIO.read(new File("C:/Users/kushw/Downloads/concept-art-sunset-city.jpg"));
+//            ByteArrayOutputStream bose = new ByteArrayOutputStream();
+//            ImageIO.write(image,"jpeg",bose);
+//            byte[] bytes = bose.toByteArray();
+//            String Image1 = Base64.getEncoder().encodeToString(bytes);
+//            String encodedImage="data:image/"+"jpeg"+";base64,"+Image1;
+//            String string = getImageData("https://i.ibb.co/N2D0PQLt/61b1314fe20c.jpg","");
+//            System.out.println(string);
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
 }
 

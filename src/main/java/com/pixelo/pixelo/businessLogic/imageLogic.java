@@ -4,9 +4,12 @@ import com.pixelo.pixelo.Base64CD.Base64Code;
 import com.pixelo.pixelo.ImageOperation.ImageCompressor;
 import com.pixelo.pixelo.ImageOperation.ImageCompressorWithQuality;
 import com.pixelo.pixelo.ImageOperation.ImageTypeConvertor;
+import com.pixelo.pixelo.ImageOperation.ImageWebp;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +76,14 @@ public class imageLogic {
                     g.dispose();
                     image = rgbImage;
                     image = ImageTypeConvertor.getConvert(image,Type);
-                } else System.out.println(e.getMessage());
+                } else  if (Type.equalsIgnoreCase("webp")){
+                   byte[] bytes= ImageWebp.getWebp(image);
+                    ByteArrayInputStream img = new ByteArrayInputStream(bytes);
+                    image = ImageIO.read(img);
+                }
+                else {
+                    System.out.println(e.getMessage());
+                }
                 }
                 result.add(Base64Code.getEncodeImage(image,Type));
             }

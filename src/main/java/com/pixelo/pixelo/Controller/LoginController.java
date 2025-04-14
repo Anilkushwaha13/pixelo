@@ -16,20 +16,20 @@ import java.util.Map;
 @RestController
 @RequestMapping("/login")
 public class LoginController {
+
     @PostMapping("/getlogin")
     public ResponseEntity<?> getLogin(@RequestBody UserLogin request){
         System.out.println(request);
         System.out.println(request.getEmailOrNumber());
         System.out.println(request.getPassword());
+
        String  registration = Login.getLogin(request.getEmailOrNumber(),request.getPassword());
         Map<String,String> response = new HashMap<>();
         if (registration != null){
             response.put("Name",registration);
        } else {
-            response.put("false","No User Found");
+            response.put("Error","No User Found");
         }
-
-
 
         return ResponseEntity.ok()
                 .header("Register","Successful")

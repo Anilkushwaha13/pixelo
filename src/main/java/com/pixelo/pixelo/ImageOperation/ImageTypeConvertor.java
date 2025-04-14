@@ -7,14 +7,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import com.twelvemonkeys.imageio.plugins.webp.WebPImageReaderSpi;
-
-
-
-
 public class ImageTypeConvertor {
     public   static BufferedImage getConvert(BufferedImage img, String convertFormate) {
-        ImageIO.scanForPlugins();
         try {
             ByteArrayOutputStream bimge = new ByteArrayOutputStream();
             ImageOutputStream image = ImageIO.createImageOutputStream(bimge);

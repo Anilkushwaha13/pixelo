@@ -13,6 +13,9 @@ target/
 .springBeans
 .sts4-cache
 
+### MY PRIVATE FILE ###
+/src/main/java/com/pixelo/pixelo/MyCredential
+
 ### IntelliJ IDEA ###
 .idea
 *.iws

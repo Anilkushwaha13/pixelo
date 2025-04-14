@@ -74,27 +74,19 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.twelvemonkeys.imageio</groupId>
-			<artifactId>imageio-webp</artifactId>
-			<version>3.9.4</version> <!-- Use latest version -->
+			<groupId>org.sejda.imageio</groupId>
+			<artifactId>webp-imageio</artifactId>
+			<version>0.1.6</version>
 		</dependency>
-<!--				&lt;!&ndash; WebP image reader/writer &ndash;&gt;-->
-<!--		<dependency>-->
-<!--			<groupId>com.github.sejda</groupId>-->
-<!--			<artifactId>imageio-webp</artifactId>-->
-<!--			<version>0.1.6</version>-->
-<!--		</dependency>-->
-
-<!--		&lt;!&ndash; Optional: general image format support &ndash;&gt;-->
-<!--				<dependency>-->
-<!--					<groupId>com.twelvemonkeys.imageio</groupId>-->
-<!--					<artifactId>imageio-core</artifactId>-->
-<!--					<version>3.10.1</version>-->
-<!--				</dependency>-->
 		<dependency>
-			<groupId>com.squareup.okhttp3</groupId>
-			<artifactId>okhttp</artifactId>
-			<version>4.12.0</version>
+			<groupId>org.mindrot</groupId>
+			<artifactId>jbcrypt</artifactId>
+			<version>0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.12.5</version>
 		</dependency>
 
 
