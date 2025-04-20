@@ -12,14 +12,14 @@ public class ImageTypeConvertor {
         try {
             ByteArrayOutputStream bimge = new ByteArrayOutputStream();
             ImageOutputStream image = ImageIO.createImageOutputStream(bimge);
-            ImageIO.write(img , convertFormate,image);
-            ByteArrayInputStream bimg2 = new ByteArrayInputStream(bimge.toByteArray());
+           ImageIO.write(img , convertFormate,image);
 
+            ByteArrayInputStream bimg2 = new ByteArrayInputStream(bimge.toByteArray());
             return ImageIO.read(bimg2);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("error2 "+e.getMessage());
-            return null ;
+               return null;
         }
 
     }

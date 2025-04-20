@@ -45,15 +45,14 @@ public class imageOperationController {
     }
 
     @PostMapping("/get-convert")
-    public ResponseEntity<Map<String,List<String>>> convertImage(@RequestBody ImageRequestwithQualityType request){
+    public ResponseEntity<List<String>> convertImage(@RequestBody ImageRequestwithQualityType request){
         List<String> convertImage = imageLogic.getConvert(request.getImages(),request.getQualityOrType());
-        Map<String,List<String>> response = new HashMap<>();
-        response.put("Images",convertImage);
-
+        System.out.println(request.getQualityOrType());
+        System.out.println(convertImage);
         return ResponseEntity.ok()
                 .header("X-Total-Images", String.valueOf(convertImage.size()))
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(response);
+                .body(convertImage);
     }
 
 

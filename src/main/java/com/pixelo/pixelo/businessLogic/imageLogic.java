@@ -10,6 +10,9 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,26 +66,34 @@ public class imageLogic {
         try {
 
             for (String Base64Images: Base64Image){
+                System.out.println("All run");
                 String base64data = Base64Images.split(",")[1];
                 BufferedImage image = Base64Code.getDecodeImage(base64data);
                 try {
-                    image = ImageTypeConvertor.getConvert(image,Type);
+                    BufferedImage img =ImageTypeConvertor.getConvert(image,Type);
+                    if (img == null){
+                        System.out.println("handle kar"); throw new RuntimeException("aukat ke bhar");}
+                    else image=img;
 
                 } catch (Exception e) {
                 if (Type.equalsIgnoreCase("jpeg") || Type.equalsIgnoreCase("jpg")) {
+                    System.out.println("jpeg special run");
                     BufferedImage rgbImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
                     Graphics2D g = rgbImage.createGraphics();
                     g.drawImage(image, 0, 0, Color.WHITE, null);
                     g.dispose();
                     image = rgbImage;
                     image = ImageTypeConvertor.getConvert(image,Type);
-                } else  if (Type.equalsIgnoreCase("webp")){
+
+                }
+                if (Type.equalsIgnoreCase("webp")){
+                    System.out.println("webp run");
                    byte[] bytes= ImageWebp.getWebp(image);
                     ByteArrayInputStream img = new ByteArrayInputStream(bytes);
                     image = ImageIO.read(img);
                 }
                 else {
-                    System.out.println(e.getMessage());
+                    System.out.println("this "+e.getMessage());
                 }
                 }
                 result.add(Base64Code.getEncodeImage(image,Type));
@@ -92,4 +103,23 @@ public class imageLogic {
         }
         return result;
     }
+
+//    public static void main(String[] args) throws IOException {
+//        File file = new File("C:/Users/kushw/Downloads/concept-art-sunset-city.jpg");
+//        BufferedImage img = ImageIO.read(file);
+//        String str = Base64Code.getEncodeImage(img,"jpg");
+//        List<String> strr = new ArrayList<>();
+//        strr.add(str);
+//        List<String> result = getCompressedImageWithQuality(strr, "0.2");
+//
+//        try {
+//            FileWriter writer = new FileWriter("C:/Users/kushw/OneDrive/Desktop/Output/output.txt");
+//            writer.write(result.get(0));
+//            writer.close();
+//            System.out.println("Successfully wrote result to output.txt");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
+

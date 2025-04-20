@@ -19,15 +19,11 @@ public class ImagePDfConroller {
 public ResponseEntity<?> generatePdf(@RequestBody ImageRequest request) {
     
     byte[] pdfByte = PdfMaker.makePdf(request.getImages());
-    Map<String,byte[]> response = new HashMap<>();
-    response.put("Pdf",pdfByte);
-
-
 
     return ResponseEntity.ok()
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=test.pdf")
             .contentType(MediaType.APPLICATION_PDF)
-            .body(response);
+            .body(pdfByte);
 }
 
     }
