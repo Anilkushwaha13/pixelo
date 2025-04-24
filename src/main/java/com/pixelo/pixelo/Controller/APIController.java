@@ -29,24 +29,27 @@ public class APIController {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(image);
     }
-    @GetMapping("/getImage2")
-    public ResponseEntity<?> getAiImage2(@RequestBody AIRequestBody request){
-
-        List<String> image = ImageAi.getImage(request.getPrompt(),request.getImp(), request.getStyle_prompt(), request.getScene(),request.getNegative());
-
-        return ResponseEntity.ok()
-                .header("X-Total-Images", "2")
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(image);
-    }
+//    @GetMapping("/getImage2")
+//    public ResponseEntity<?> getAiImage2(@RequestBody AIRequestBody request){
+//
+//        List<String> image = ImageAi.getImage(request.getPrompt(),request.getImp(), request.getStyle_prompt(), request.getScene(),request.getNegative());
+//
+//        return ResponseEntity.ok()
+//                .header("X-Total-Images", "2")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .body(image);
+//    }
     @PostMapping("/imageReader")
     public ResponseEntity<?> getImageData(@RequestBody ImageAiRequestBody request){
 
         String image = ImageReaderAi.getImageData(request.getImageData(), request.getMessage());
-
+        Map<String,String> reponse = new HashMap<>();
+        reponse.put("data",image);
+        System.out.println(image);
+        System.out.println(reponse);
         return ResponseEntity.ok()
                 .header("X-Total-Images", "1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(image);
+                .body(reponse);
     }
 }

@@ -16,20 +16,20 @@ import java.util.Objects;
 @RequestMapping("/image")
 public class imageOperationController {
 
-    @PostMapping("/get-compressed")
-    public ResponseEntity<Map<String, List<String>>> compressImage(@RequestBody ImageRequest request){
-        List<String> compressedImage = imageLogic.getCompressedImage(request.getImages());
-        System.out.println(compressedImage);
-
-        Map<String,List<String>> response = new HashMap<>();
-        response.put("Data",compressedImage);
-
-
-        return ResponseEntity.ok()
-                .header("X-Total-Images", String.valueOf(compressedImage.size()))
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(response);
-    }
+//    @PostMapping("/get-compressed")
+//    public ResponseEntity<Map<String, List<String>>> compressImage(@RequestBody ImageRequest request){
+//        List<String> compressedImage = imageLogic.getCompressedImage(request.getImages());
+//        System.out.println(compressedImage);
+//
+//        Map<String,List<String>> response = new HashMap<>();
+//        response.put("Data",compressedImage);
+//
+//
+//        return ResponseEntity.ok()
+//                .header("X-Total-Images", String.valueOf(compressedImage.size()))
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .body(response);
+//    }
 
     @PostMapping("/get-compressed-quality")
     public ResponseEntity<Map<String,List<String>>> compressImageWithQuality(@RequestBody ImageRequestwithQualityType request){
