@@ -12,11 +12,17 @@ public class CreateUserTable {
         try {
             con = ConnectionProvider.getCon();
             firstState = con.createStatement();
-            int createResult = firstState.executeUpdate("CREATE TABLE imageai (" +
+//            int createResult = firstState.executeUpdate("CREATE TABLE imageai (" +
+//                    "    email VARCHAR(200)," +
+//                    "    imagedata LONGBLOB ," +
+//                    "    imageType VARCHAR(20) not null," +
+//                    "    CONSTRAINT fk_email FOREIGN KEY (email) REFERENCES appuser(email)" +
+//                    ");");
+            int createResult = firstState.executeUpdate("CREATE TABLE draftImage (" +
                     "    email VARCHAR(200)," +
                     "    imagedata LONGBLOB ," +
                     "    imageType VARCHAR(20) not null," +
-                    "    CONSTRAINT fk_email FOREIGN KEY (email) REFERENCES appuser(email)" +
+                    "    CONSTRAINT fk1_email FOREIGN KEY (email) REFERENCES appuser(email)" +
                     ");");
 //            int createResult = firstState.executeUpdate("CREATE TABLE appuser ("
 //                    + "email VARCHAR(200) PRIMARY KEY,  "
