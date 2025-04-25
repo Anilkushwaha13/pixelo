@@ -1,10 +1,12 @@
 package com.pixelo.pixelo.DataBase;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class UpdatAiImage {
     public static boolean updateImage(String userName,String type,byte[] bytes){
@@ -16,7 +18,7 @@ public class UpdatAiImage {
             String sql = "insert into imageai values (?,?,?);";
             stat = con.prepareStatement(sql);
             stat.setString(1,userName);
-            stat.setString(2, Arrays.toString(bytes));
+            stat.setBytes(2,bytes);
             stat.setString(3,type);
             int result = stat.executeUpdate();
 
@@ -29,4 +31,33 @@ public class UpdatAiImage {
             throw new RuntimeException(e);
         }
     }
+    public static ArrayList<BufferedImage> getAiImage(int req){
+        Connection con = null;
+        PreparedStatement stat = null;
+        int image = 10;
+        int offset = req * image;
+      ArrayList<BufferedImage> list = new ArrayList<>();
+        try {
+            con = ConnectionProvider.getCon();
+            String sql = "SELECT * FROM appusers.imageai limit ? offset ?;";
+            stat = con.prepareStatement(sql);
+            stat.setInt(1,image);
+            stat.setInt(2,offset);
+            System.out.println(stat);
+            ResultSet result = stat.executeQuery();
+            while (result.next()){
+                byte[] bytes= result.getBytes("imageData");
+                String type = result.getString("imageType");
+                ByteArrayInputStream in = new ByteArrayInputStream(bytes);
+                BufferedImage img = ImageIO.read(in);
+                list.add(img);
+
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return  list;
+    }
+
 }

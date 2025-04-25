@@ -28,7 +28,7 @@ public class WebConfig implements WebMvcConfigurer, Jackson2ObjectMapperBuilderC
     public void customize(Jackson2ObjectMapperBuilder jacksonObjectMapperBuilder) {
         // Create a custom JsonFactory with stream read constraints
         JsonFactory factory = JsonFactory.builder()
-                .streamReadConstraints(StreamReadConstraints.builder().maxStringLength(250000000).build()).build();
+                .streamReadConstraints(StreamReadConstraints.builder().maxStringLength(200000000).maxNumberLength(10000).maxNestingDepth(10000).build()).build();
 //                .streamReadConstraints(StreamReadConstraints.builder()
 //                        .maxStringLength(500_00_000)  // Example large string length limit
 //                        .build())

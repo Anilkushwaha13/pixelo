@@ -2,6 +2,7 @@ package com.pixelo.pixelo.Controller;
 
 import com.pixelo.pixelo.Request.ImageRequest;
 import com.pixelo.pixelo.businessLogic.JWTToken;
+import com.pixelo.pixelo.businessLogic.UpdateImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +13,11 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/download-img")
+@RequestMapping("/get")
 public class downloadController {
     @Autowired
     JWTToken tokenChecker;
-    @GetMapping()
+    @GetMapping("/download")
     public ResponseEntity<?> getDownload(@RequestBody ImageRequest request) {
         String token = request.getToken();
         String userName = request.getUserName();
@@ -33,13 +34,14 @@ public class downloadController {
                     .body(response);
         }
     }
-    @GetMapping("/ai")
+    @GetMapping("/ai-download")
     public ResponseEntity<?> getDownloadAndUpdate(@RequestBody ImageRequest request) {
         String token = request.getToken();
         String userName = request.getUserName();
         List<String> list = request.getImages();
 
         if (tokenChecker.validateToken(userName, token)) {
+            UpdateImage.UpdateAiImage(userName,list.get(0));
             return ResponseEntity.ok()
                     .body(list);
         }
@@ -51,4 +53,13 @@ public class downloadController {
                     .body(response);
         }
     }
-}
+    @GetMapping("/ai-image")
+    public ResponseEntity<?> getAiImage(@RequestParam int req) {
+
+        List<String> list = UpdateImage.getAiImage(req);
+
+            return ResponseEntity.ok()
+                    .body(list);
+        }
+    }
+
