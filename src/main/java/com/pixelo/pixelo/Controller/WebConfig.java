@@ -15,7 +15,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import java.util.List;
 
 @Configuration
-public class WebConfig implements WebMvcConfigurer, Jackson2ObjectMapperBuilderCustomizer {
+public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -24,20 +24,20 @@ public class WebConfig implements WebMvcConfigurer, Jackson2ObjectMapperBuilderC
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
     }
 
-    @Override
-    public void customize(Jackson2ObjectMapperBuilder jacksonObjectMapperBuilder) {
-        // Create a custom JsonFactory with stream read constraints
-        JsonFactory factory = JsonFactory.builder()
-                .streamReadConstraints(StreamReadConstraints.builder().maxStringLength(200000000).maxNumberLength(10000).maxNestingDepth(10000).build()).build();
-//                .streamReadConstraints(StreamReadConstraints.builder()
-//                        .maxStringLength(500_00_000)  // Example large string length limit
-//                        .build())
-//                .build();
-
-        // Create a custom ObjectMapper using the custom JsonFactory
-        ObjectMapper customMapper = JsonMapper.builder(factory).build();
-
-        // Configure the Jackson2ObjectMapperBuilder with the custom ObjectMapper
-        jacksonObjectMapperBuilder.configure(customMapper);
-    }
+//    @Override
+//    public void customize(Jackson2ObjectMapperBuilder jacksonObjectMapperBuilder) {
+//        // Create a custom JsonFactory with stream read constraints
+//        JsonFactory factory = JsonFactory.builder()
+//                .streamReadConstraints(StreamReadConstraints.builder().maxStringLength(90000000).maxNumberLength(1000).maxNestingDepth(1000).build()).build();
+////                .streamReadConstraints(StreamReadConstraints.builder()
+////                        .maxStringLength(500_00_000)  // Example large string length limit
+////                        .build())
+////                .build();
+//
+//        // Create a custom ObjectMapper using the custom JsonFactory
+//        ObjectMapper customMapper = JsonMapper.builder(factory).build();
+//
+//        // Configure the Jackson2ObjectMapperBuilder with the custom ObjectMapper
+//        jacksonObjectMapperBuilder.configure(customMapper);
+//    }
 }

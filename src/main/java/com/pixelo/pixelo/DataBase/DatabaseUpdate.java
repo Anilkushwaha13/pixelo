@@ -1,5 +1,7 @@
 package com.pixelo.pixelo.DataBase;
 
+import com.pixelo.pixelo.businessLogic.PasswordEncrypter;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -16,7 +18,7 @@ public class DatabaseUpdate {
              input.setString(1,email);
              input.setString(2,Username);
              input.setString(3,number);
-             input.setString(4,password);
+             input.setString(4, PasswordEncrypter.hashPassword(password));
 
             int result = input.executeUpdate();
 

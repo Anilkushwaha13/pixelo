@@ -22,6 +22,7 @@ public class downloadController {
         String token = request.getToken();
         String userName = request.getUserName();
         List<String> list = request.getImages();
+        System.out.println(list.get(0).length());
         if (tokenChecker.validateToken(userName, token)) {
             return ResponseEntity.ok()
                     .body(list);

@@ -5,6 +5,8 @@ import com.pixelo.pixelo.DataBase.Login;
 import com.pixelo.pixelo.Request.UserLogin;
 import com.pixelo.pixelo.businessLogic.LoginLogic;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,25 +25,24 @@ public class LoginController {
     @Autowired
     LoginLogic loginLogic;
 
-    @PostMapping("/getlogin")
+    @PostMapping("/get-login")
     public ResponseEntity<?> getLogin(@RequestBody UserLogin request){
         System.out.println(request);
         System.out.println(request.getEmailOrNumber());
         System.out.println(request.getPassword());
 
-       ArrayList<String> loginList = loginLogic.getLoginToken(request.getEmailOrNumber(),request.getPassword());
-        Map<String,String> response = new HashMap<>();
-        if (loginList != null){
-            response.put("Name",loginList.get(0));
-            response.put("UserName",loginList.get(1));
-            response.put("Token",loginList.get(2));
+        Map<String,String> loginList = loginLogic.getLoginToken(request.getEmailOrNumber(),request.getPassword());
+//        Map<String,String> response = new HashMap<>();
+        if (loginList != null && !loginList.containsKey("password")){
+            return ResponseEntity.ok()
+                    .header("Register","Successful")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(loginList);
        } else {
-            response.put("Error","No User Found");
+            loginList = null;
+            return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok()
-                .header("Register","Successful")
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(response);
+
     }
 }
