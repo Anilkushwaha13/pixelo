@@ -3,7 +3,9 @@ package com.pixelo.pixelo.Controller;
 import com.pixelo.pixelo.Request.ImageRequest;
 import com.pixelo.pixelo.businessLogic.JWTToken;
 import com.pixelo.pixelo.businessLogic.UpdateImage;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +20,18 @@ public class downloadController {
     @Autowired
     JWTToken tokenChecker;
     @GetMapping("/download")
-    public ResponseEntity<?> getDownload(@RequestBody ImageRequest request) {
-        String token = request.getToken();
-        String userName = request.getUserName();
+    public ResponseEntity<?> getDownload(@RequestBody ImageRequest request, HttpServletRequest req) {
+        String authHeader = req.getHeader("Authorization");
+        if (authHeader ==null  || !authHeader.startsWith("Bearer ")){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        String token = authHeader.substring(7);
+//        String token = request.getToken();
+
+//        String userName = request.getUserName();
         List<String> list = request.getImages();
         System.out.println(list.get(0).length());
-        if (tokenChecker.validateToken(userName, token)) {
+        if (tokenChecker.validateToken(request.getUserName(), token)) {
             return ResponseEntity.ok()
                     .body(list);
         }
@@ -36,8 +44,13 @@ public class downloadController {
         }
     }
     @GetMapping("/ai-download")
-    public ResponseEntity<?> getDownloadAndUpdate(@RequestBody ImageRequest request) {
-        String token = request.getToken();
+    public ResponseEntity<?> getDownloadAndUpdate(@RequestBody ImageRequest request, HttpServletRequest req) {
+        String authHeader = req.getHeader("Authorization");
+        if (authHeader ==null  || !authHeader.startsWith("Bearer ")){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        String token = authHeader.substring(7);
+//        String token = request.getToken();
         String userName = request.getUserName();
         List<String> list = request.getImages();
 
