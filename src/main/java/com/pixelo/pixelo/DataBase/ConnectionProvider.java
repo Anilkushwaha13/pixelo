@@ -13,9 +13,9 @@ public class ConnectionProvider {
     public static Connection getCon(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-             final String db= db_repo.getValue(); // Replace with your own value
-             final String user=db_user.getValue();// Replace with your own value
-             final  String pass =db_pass.getValue();// Replace with your own value
+             final String db= "jdbc:mysql://localhost:3306/appusers"; // Replace with your own value
+             final String user="root";// Replace with your own value
+             final  String pass = "8446783531";// Replace with your own value
             Connection con = DriverManager.getConnection(db,user,pass);
             return con;
 
