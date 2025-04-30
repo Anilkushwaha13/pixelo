@@ -6,8 +6,8 @@ import java.util.List;
 
 public class ImageRequest {
     private List<String> images = new ArrayList<>();
-    private String token;
-    private String userName;
+
+    private String email;
 
     public List<String> getImages() {
         return images;
@@ -17,19 +17,13 @@ public class ImageRequest {
         this.images = images;
     }
 
-    public String getToken() {
-        return token;
+
+
+    public String getEmail() {
+        return email;
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -2,15 +2,15 @@ package com.pixelo.pixelo.Request;
 
 public class UserLogin {
 
-    private String EmailOrNumber;
+    private String email;
     private String password;
 
-    public String getEmailOrNumber() {
-        return EmailOrNumber;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailOrNumber(String emailOrNumber) {
-        EmailOrNumber = emailOrNumber;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

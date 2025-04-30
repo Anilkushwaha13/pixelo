@@ -20,7 +20,7 @@ public class downloadController {
     @Autowired
     JWTToken tokenChecker;
     @GetMapping("/download")
-    public ResponseEntity<?> getDownload(@RequestBody ImageRequest request, HttpServletRequest req) {
+    public ResponseEntity<?> getDownload(@RequestParam String email, HttpServletRequest req) {
         String authHeader = req.getHeader("Authorization");
         if (authHeader ==null  || !authHeader.startsWith("Bearer ")){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -29,42 +29,38 @@ public class downloadController {
 //        String token = request.getToken();
 
 //        String userName = request.getUserName();
-        List<String> list = request.getImages();
-        System.out.println(list.get(0).length());
-        if (tokenChecker.validateToken(request.getUserName(), token)) {
+//        List<String> list = request.getImages();
+//        System.out.println(list.get(0).length());
+        if (tokenChecker.validateToken(email, token)) {
             return ResponseEntity.ok()
-                    .body(list);
+                    .body(true);
         }
-
         else {
-            Map<String,String> response = new HashMap<>();
-            response.put("Error","No User Found");
+//            Map<String,String> response = new HashMap<>();
+//            response.put("Error","No User Found");
             return ResponseEntity.badRequest()
-                    .body(response);
+                    .body(false);
         }
     }
     @GetMapping("/ai-download")
-    public ResponseEntity<?> getDownloadAndUpdate(@RequestBody ImageRequest request, HttpServletRequest req) {
+    public ResponseEntity<?> getDownloadAndUpdate(@RequestBody ImageRequest request,@RequestParam String email, HttpServletRequest req) {
         String authHeader = req.getHeader("Authorization");
         if (authHeader ==null  || !authHeader.startsWith("Bearer ")){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         String token = authHeader.substring(7);
 //        String token = request.getToken();
-        String userName = request.getUserName();
-        List<String> list = request.getImages();
+//        String userName = request.getUserName();
 
-        if (tokenChecker.validateToken(userName, token)) {
-            UpdateImage.UpdateAiImage(userName,list.get(0));
+        if (tokenChecker.validateToken(email, token)) {
+           boolean bol= UpdateImage.UpdateAiImage(email,request.getImages().get(0));
             return ResponseEntity.ok()
-                    .body(list);
+                    .body(bol);
         }
 
         else {
-            Map<String,String> response = new HashMap<>();
-            response.put("Error","No User Found");
             return ResponseEntity.badRequest()
-                    .body(response);
+                    .body(false);
         }
     }
     @GetMapping("/ai-image")

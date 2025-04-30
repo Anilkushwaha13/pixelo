@@ -25,10 +25,10 @@ public class Login {
             if (result.next()){
                 Map<String,String> userData = new HashMap<>();
                     String name = result.getString("name");
-                    String username = result.getString("email");
+                    String email = result.getString("email");
                     String password = result.getString("password");
                     userData.put("name",name);
-                    userData.put("username",username);
+                    userData.put("email",email);
                     userData.put("password",password);
                     return  userData;
             }

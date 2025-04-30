@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 
 public class DatabaseUpdate {
 
-    public static Boolean getRegister(String email ,String Username,String number, String password){
+    public static Boolean getRegister(String Username,String number, String email ,String password){
 
         Connection con = null;
         PreparedStatement input = null;
@@ -42,7 +42,7 @@ public class DatabaseUpdate {
 
         }
     }
-    public static Boolean getUpdate(String email ,String Username){
+    public static Boolean getUpdate(String email ,String name){
 
         Connection con = null;
         PreparedStatement input = null;
@@ -50,7 +50,7 @@ public class DatabaseUpdate {
              con = ConnectionProvider.getCon();
              String sql = "Update  appuser name=? Where email=?)";
              input = con.prepareStatement(sql);
-             input.setString(1,Username);
+             input.setString(1,name);
              input.setString(2,email);
 
             int result = input.executeUpdate();

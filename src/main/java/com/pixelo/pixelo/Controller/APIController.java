@@ -20,9 +20,9 @@ import java.util.Map;
 public class APIController {
 
     @PostMapping("/getImage")
-    public ResponseEntity<?> getAiImage(@RequestBody AiRequestBody2 request){
+    public ResponseEntity<?> getAiImage(@RequestParam String prompt){
 
-        List<String> image = ImageAi2.getImage2(request.getPrompt());
+        List<String> image = ImageAi2.getImage2(prompt);
 
         return ResponseEntity.ok()
                 .header("X-Total-Images", "1")

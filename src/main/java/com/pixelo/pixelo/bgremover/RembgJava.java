@@ -12,7 +12,7 @@ public class RembgJava {
 //    public static void main(String[] args) throws Exception {
 //        String inputImagePath = "C:\\Users\\kushw\\OneDrive\\Desktop\\frontend2\\image-editor\\public\\img\\ai-image.jpg";
 //        String outputImagePath = "C:/Users/kushw/OneDrive/Desktop/Output/output.png";
-//        String modelPath = "D:/pixelo/src/main/resources/u2net.onnx";
+//        String modelPath = "/src/main/resources/u2net.onnx";
 //        // Load and resize input image
 //        BufferedImage inputImage = ImageIO.read(new File(inputImagePath));
 //        BufferedImage resized = resizeTo320x320(inputImage); // Resize to 320x320
@@ -44,7 +44,7 @@ public class RembgJava {
 
 
     public static BufferedImage getBgRemoved( BufferedImage inputImage) throws  Exception{
-        String modelPath = "/src/main/resources/u2net.onnx";
+        String modelPath = "u2net.onnx";
         BufferedImage resized = resizeTo320x320(inputImage); // Resize to 320x320
         float[] inputTensorData = convertImageToTensor(resized); // Convert to NCHW float[]
 
