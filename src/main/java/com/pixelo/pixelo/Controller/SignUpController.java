@@ -27,9 +27,8 @@ public class SignUpController {
         System.out.println(request);
         System.out.println(request.getUserName());
         System.out.println(request.getEmail());
-        System.out.println(request.getNumber());
         System.out.println(request.getPassword());
-        Boolean registration = DatabaseUpdate.getRegister(request.getUserName(),request.getNumber(), request.getEmail(), request.getPassword());
+        Boolean registration = DatabaseUpdate.getRegister(request.getUserName(), request.getEmail(), request.getPassword());
         return ResponseEntity.ok()
                 .header("Register","Successful")
                 .contentType(MediaType.APPLICATION_JSON)

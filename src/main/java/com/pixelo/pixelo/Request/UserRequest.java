@@ -2,7 +2,6 @@ package com.pixelo.pixelo.Request;
 
 public class UserRequest {
     private String UserName;
-    private String number;
     private String email;
     private String password;
 
@@ -22,9 +21,6 @@ public class UserRequest {
         this.email = email;
     }
 
-    public String getNumber() {
-        return number;
-    }
 
     public String getPassword() {
         return password;
@@ -34,7 +30,4 @@ public class UserRequest {
         this.password = password;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
 }

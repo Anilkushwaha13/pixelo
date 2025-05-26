@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 
 public class DatabaseUpdate {
 
-    public static Boolean getRegister(String Username,String number, String email ,String password){
+    public static Boolean getRegister(String Username, String email ,String password){
 
         Connection con = null;
         PreparedStatement input = null;
@@ -17,18 +17,19 @@ public class DatabaseUpdate {
              input = con.prepareStatement(sql);
              input.setString(1,email);
              input.setString(2,Username);
-             input.setString(3,number);
              input.setString(4, PasswordEncrypter.hashPassword(password));
 
             int result = input.executeUpdate();
 
-            if(result == 0){
+            if(result != 0){
                 return true;
             }
             else return false;
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
+            return false;
+
         } finally {
             try {
                 input.close();
@@ -76,8 +77,8 @@ public class DatabaseUpdate {
         }
     }
 
-    public static void main(String[] args) {
-        Boolean register= getRegister("as123@gmail.com","Abhi","5456464","4646654dfg");
-        System.out.println(register);
-    }
+//    public static void main(String[] args) {
+//        Boolean register= getRegister("Abhi","as123@gmail.com","4646654dfg");
+//        System.out.println(register);
+//    }
 }

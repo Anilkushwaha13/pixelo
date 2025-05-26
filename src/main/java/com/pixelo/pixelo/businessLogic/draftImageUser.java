@@ -36,11 +36,11 @@ public class draftImageUser {
     }
 
 
-    public static void main(String[] args) {
-//               String userName = "as123@gmail.com";
-//               String base64Image =  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
-//               System.out.println(draft(userName,base64Image));
-               ArrayList<?> list =getDraft("as123@gmail.com");
-        System.out.println(list);
-    }
+//    public static void main(String[] args) {
+////               String userName = "as123@gmail.com";
+////               String base64Image =  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
+////               System.out.println(draft(userName,base64Image));
+//               ArrayList<?> list =getDraft("as123@gmail.com");
+//        System.out.println(list);
+//    }
 }
