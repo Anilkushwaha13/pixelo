@@ -13,11 +13,11 @@ public class DatabaseUpdate {
         PreparedStatement input = null;
         try {
              con = ConnectionProvider.getCon();
-             String sql = "INSERT into appuser values  (?,?,?,?)";
+             String sql = "INSERT into appuser values  (?,?,?)";
              input = con.prepareStatement(sql);
              input.setString(1,email);
              input.setString(2,Username);
-             input.setString(4, PasswordEncrypter.hashPassword(password));
+             input.setString(3, PasswordEncrypter.hashPassword(password));
 
             int result = input.executeUpdate();
 

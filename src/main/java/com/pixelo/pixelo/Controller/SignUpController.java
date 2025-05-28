@@ -22,7 +22,7 @@ import java.util.Map;
 public class SignUpController {
     @Autowired
     JWTToken tokenChecker;
-    @PostMapping("/register")
+    @PostMapping("/signup")
     public ResponseEntity<?> getRegister(@RequestBody UserRequest request){
         System.out.println(request);
         System.out.println(request.getUserName());
