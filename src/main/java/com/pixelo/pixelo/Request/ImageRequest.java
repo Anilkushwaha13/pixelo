@@ -7,8 +7,6 @@ import java.util.List;
 public class ImageRequest {
     private List<String> images = new ArrayList<>();
 
-    private String email;
-
     public List<String> getImages() {
         return images;
     }
@@ -18,12 +16,4 @@ public class ImageRequest {
     }
 
 
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

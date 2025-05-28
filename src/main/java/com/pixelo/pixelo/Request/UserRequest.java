@@ -1,16 +1,16 @@
 package com.pixelo.pixelo.Request;
 
 public class UserRequest {
-    private String UserName;
+    private String userName;
     private String email;
     private String password;
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        this.userName = userName;
     }
 
     public String getEmail() {

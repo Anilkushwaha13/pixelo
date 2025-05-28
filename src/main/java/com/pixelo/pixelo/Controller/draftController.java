@@ -1,5 +1,6 @@
 package com.pixelo.pixelo.Controller;
 
+import com.pixelo.pixelo.Request.ImageDownSaveRequest;
 import com.pixelo.pixelo.Request.ImageRequest;
 import com.pixelo.pixelo.businessLogic.JWTToken;
 import com.pixelo.pixelo.businessLogic.draftImageUser;
@@ -20,17 +21,19 @@ public class draftController {
     JWTToken tokenChecker;
 
     @PostMapping("/save")
-    public ResponseEntity<?> getDownloadAndUpdate(@RequestBody ImageRequest request, HttpServletRequest req) {
+    public ResponseEntity<?> getDownloadAndUpdate(@RequestBody ImageDownSaveRequest request,@RequestParam String email, HttpServletRequest req) {
         String authHeader = req.getHeader("Authorization");
         if (authHeader ==null  || !authHeader.startsWith("Bearer ")){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         String token = authHeader.substring(7);
 
-        List<String> list = request.getImages();
+
+        System.out.println(request.getImage());
+        System.out.println(email);
         boolean bol = false;
-        if (tokenChecker.validateToken(request.getEmail(), token)) {
-             bol = draftImageUser.draft(request.getEmail(),list.get(0));
+        if (tokenChecker.validateToken( email, token)) {
+             bol = draftImageUser.draft(email,request.getImage());
 
         }
         return ResponseEntity.ok()

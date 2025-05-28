@@ -1,5 +1,6 @@
 package com.pixelo.pixelo.Controller;
 
+import com.pixelo.pixelo.Request.ImageDownSaveRequest;
 import com.pixelo.pixelo.Request.ImageRequest;
 import com.pixelo.pixelo.businessLogic.JWTToken;
 import com.pixelo.pixelo.businessLogic.UpdateImage;
@@ -43,7 +44,7 @@ public class downloadController {
         }
     }
     @GetMapping("/ai-download")
-    public ResponseEntity<?> getDownloadAndUpdate(@RequestBody ImageRequest request,@RequestParam String email, HttpServletRequest req) {
+    public ResponseEntity<?> getDownloadAndUpdate(@RequestBody ImageDownSaveRequest request, @RequestParam String email, HttpServletRequest req) {
         String authHeader = req.getHeader("Authorization");
         if (authHeader ==null  || !authHeader.startsWith("Bearer ")){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -53,7 +54,7 @@ public class downloadController {
 //        String userName = request.getUserName();
 
         if (tokenChecker.validateToken(email, token)) {
-           boolean bol= UpdateImage.UpdateAiImage(email,request.getImages().get(0));
+           boolean bol= UpdateImage.UpdateAiImage(email,request.getImage());
             return ResponseEntity.ok()
                     .body(bol);
         }

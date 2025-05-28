@@ -49,14 +49,14 @@ public class DatabaseUpdate {
         PreparedStatement input = null;
         try {
              con = ConnectionProvider.getCon();
-             String sql = "Update  appuser name=? Where email=?)";
+             String sql = "Update  appuser set name=? Where email=?";
              input = con.prepareStatement(sql);
              input.setString(1,name);
              input.setString(2,email);
 
             int result = input.executeUpdate();
 
-            if(result == 0){
+            if(result == 1){
                 return true;
             }
             else return false;
@@ -70,7 +70,7 @@ public class DatabaseUpdate {
 
 
             } catch (Exception e) {
-                System.out.println(e);
+                System.out.println("error:" +e);
                 System.out.println(System.currentTimeMillis());
             }
 

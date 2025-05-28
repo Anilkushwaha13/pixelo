@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 
 public class draftImageUser {
-    public static boolean draft(String userName, String base64Image){
+    public static boolean draft(String email, String base64Image){
         try {
             System.out.println(base64Image);
             String type =base64Image.split(",")[0].split(";")[0].split("/")[1];
@@ -16,7 +16,7 @@ public class draftImageUser {
             System.out.println("type"+type);
             byte[] bytes =  Base64.getDecoder().decode(base64data);
             System.out.println(bytes);
-            boolean bol = draftImageUpdate.draftImage(userName,type,bytes);
+            boolean bol = draftImageUpdate.draftImage(email,type,bytes);
             return bol;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -24,8 +24,8 @@ public class draftImageUser {
 
     }
 
-    public static ArrayList<String> getDraft(String userName){
-        ArrayList<BufferedImage> list = draftImageUpdate.getDraftImage(userName);
+    public static ArrayList<String> getDraft(String email){
+        ArrayList<BufferedImage> list = draftImageUpdate.getDraftImage(email);
         ArrayList<String> base64Image = new ArrayList<>();
         for (BufferedImage img : list){
             String image = Base64Code.getEncodeImage(img,"png");
