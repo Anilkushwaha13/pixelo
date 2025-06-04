@@ -6,7 +6,9 @@ import java.io.ByteArrayInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
 
 public class draftImageUpdate {
     public static boolean draftImage(String userName,String type,byte[] bytes){
@@ -14,27 +16,40 @@ public class draftImageUpdate {
         PreparedStatement stat = null;
 
         try {
+
             con = ConnectionProvider.getCon();
-            String sql = "insert into draftImage values (?,?,?);";
-            stat = con.prepareStatement(sql);
+
+            String sql1 = "SELECT  COUNT(*) count  FROM appusers.draftimage where email = ?";
+            stat = con.prepareStatement(sql1);
             stat.setString(1,userName);
-            stat.setBytes(2,bytes);
-            stat.setString(3,type);
-            int result = stat.executeUpdate();
+            ResultSet rs = stat.executeQuery();
+            int count=0;
+            while (rs.next()){
+                 count = rs.getInt("count");
+            }
+            if (count < 3)  {
 
-            if (result == 0){
-                return false;
-            }else return true;
+                String sql = "insert into draftImage (email, imagedata, imageType, time) values (?,?,?,?);";
+                stat = con.prepareStatement(sql);
+                stat.setString(1, userName);
+                stat.setBytes(2, bytes);
+                stat.setString(3, type);
+                stat.setString(4, String.valueOf(new Timestamp(System.currentTimeMillis())));
+                int result = stat.executeUpdate();
 
+                if (result == 0) {
+                    return false;
+                } else return true;
+            } else  throw new RuntimeException("Limit has been reached for Draft");
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-    public static ArrayList<BufferedImage> getDraftImage(String userName){
+    public static Map<Integer, BufferedImage> getDraftImage(String userName){
         Connection con = null;
         PreparedStatement stat = null;
-        ArrayList<BufferedImage> list = new ArrayList<>();
+        Map<Integer,BufferedImage> image= new HashMap<>();
         try {
             con = ConnectionProvider.getCon();
             String sql = "SELECT * FROM appusers.draftImage where email=?;";
@@ -43,17 +58,39 @@ public class draftImageUpdate {
             System.out.println(stat);
             ResultSet result = stat.executeQuery();
             while (result.next()){
+                int i;
                 byte[] bytes= result.getBytes("imageData");
+                int id= result.getInt("id");
 //                String type = result.getString("imageType");
                 ByteArrayInputStream in = new ByteArrayInputStream(bytes);
                 BufferedImage img = ImageIO.read(in);
-                list.add(img);
+                image.put(id,img);
+
 
             }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());;
         }
-        return  list;
+        return  image;
+    }
+    public static boolean deleteDraftImage(String email,int id){
+        Connection con = null;
+        PreparedStatement stat = null;
+        try {
+            con = ConnectionProvider.getCon();
+            String sql = "Delete FROM appusers.draftImage where email=? and id = ?;";
+            stat = con.prepareStatement(sql);
+            stat.setString(1,email);
+            stat.setInt(2,id);
+            int result = stat.executeUpdate();
+
+            if (result == 0) {
+                return false;
+            } else return true;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

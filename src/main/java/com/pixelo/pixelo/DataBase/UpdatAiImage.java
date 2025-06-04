@@ -6,6 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.*;
 
 public class UpdatAiImage {
@@ -15,11 +16,12 @@ public class UpdatAiImage {
 
         try {
             con = ConnectionProvider.getCon();
-            String sql = "insert into imageai values (?,?,?);";
+            String sql = "insert into imageai values (?,?,?,?);";
             stat = con.prepareStatement(sql);
             stat.setString(1,userName);
             stat.setBytes(2,bytes);
             stat.setString(3,type);
+            stat.setString(4,String.valueOf(new Timestamp(System.currentTimeMillis())));
             int result = stat.executeUpdate();
 
             if (result == 0){

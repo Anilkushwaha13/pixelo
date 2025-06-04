@@ -48,11 +48,24 @@ public class draftController {
     }
     String token = authHeader.substring(7);
         if (tokenChecker.validateToken(email,token )) {
-            List<String> list = draftImageUser.getDraft(email);
+            Map<Integer, String> list = draftImageUser.getDraft(email);
 
             return ResponseEntity.ok()
                     .body(list);
         }
         else return ResponseEntity.noContent().build();
+    }
+    @DeleteMapping("delete")
+    public  ResponseEntity<?> deleteDraft(@RequestParam String email,int id,HttpServletRequest req){
+        String authHeader = req.getHeader("Authorization");
+        if (authHeader ==null  || !authHeader.startsWith("Bearer ")){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        String token = authHeader.substring(7);
+        if (tokenChecker.validateToken(email,token )) {
+            return ResponseEntity.ok()
+                    .body(draftImageUser.deleteDraft(email,id));
+        }
+        else return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
     }
 }

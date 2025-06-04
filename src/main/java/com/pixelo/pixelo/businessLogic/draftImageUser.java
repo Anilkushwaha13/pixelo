@@ -4,8 +4,9 @@ import com.pixelo.pixelo.Base64CD.Base64Code;
 import com.pixelo.pixelo.DataBase.draftImageUpdate;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 public class draftImageUser {
     public static boolean draft(String email, String base64Image){
@@ -24,15 +25,20 @@ public class draftImageUser {
 
     }
 
-    public static ArrayList<String> getDraft(String email){
-        ArrayList<BufferedImage> list = draftImageUpdate.getDraftImage(email);
-        ArrayList<String> base64Image = new ArrayList<>();
-        for (BufferedImage img : list){
-            String image = Base64Code.getEncodeImage(img,"png");
-            base64Image.add(image);
+    public static Map<Integer, String> getDraft(String email){
+        Map<Integer,BufferedImage> list = draftImageUpdate.getDraftImage(email);
+        Map<Integer,String> encodedImage = new HashMap<>();
+
+        for ( Map.Entry<Integer, BufferedImage> entry : list.entrySet()){
+            String image = Base64Code.getEncodeImage(entry.getValue(),"png");
+            encodedImage.put(entry.getKey(),image);
         }
 
-        return base64Image;
+        return encodedImage;
+    }
+    public static boolean deleteDraft(String email, int id) {
+        return draftImageUpdate.deleteDraftImage(email,id);
+
     }
 
 
