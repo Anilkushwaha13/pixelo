@@ -15,7 +15,7 @@ target/
 
 ### MY PRIVATE FILE ###
 /src/main/java/com/pixelo/pixelo/MyCredential
-
+src/main/resources/u2net.onnx
 ### IntelliJ IDEA ###
 .idea
 *.iws
