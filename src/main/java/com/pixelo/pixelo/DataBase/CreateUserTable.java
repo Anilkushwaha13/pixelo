@@ -29,7 +29,8 @@ public class CreateUserTable {
 //            int createResult = firstState.executeUpdate("CREATE TABLE appuser ("
 //                    + "email VARCHAR(200) PRIMARY KEY,  "
 //                    + "name VARCHAR(200), "
-//                    + "password VARCHAR(200) )");
+//                    + "password VARCHAR(200)"
+//                    +" "`time` VARCHAR(45) )");
 //
             if (createResult == 0) {  // executeUpdate() returns 0 for DDL statements
                 JOptionPane.showMessageDialog(null, "Table created successfully");

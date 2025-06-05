@@ -32,6 +32,17 @@ public class UpdatAiImage {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        finally {
+            try {
+                stat.close();
+                con.close();
+
+
+            } catch (Exception e) {
+                System.out.println("error:" + e);
+                System.out.println(System.currentTimeMillis());
+            }
+        }
     }
     public static ArrayList<BufferedImage> getAiImage(int req){
         Connection con = null;
@@ -58,6 +69,16 @@ public class UpdatAiImage {
 
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                stat.close();
+                con.close();
+
+
+            } catch (Exception e) {
+                System.out.println("error:" + e);
+                System.out.println(System.currentTimeMillis());
+            }
         }
         return  list;
     }

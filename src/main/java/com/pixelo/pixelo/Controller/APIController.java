@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,12 +23,23 @@ public class APIController {
     @PostMapping("/getImage")
     public ResponseEntity<?> getAiImage(@RequestParam String prompt){
 
-        List<String> image = ImageAi2.getImage2(prompt);
+        String image = ImageAi2.getImage2(prompt);
+        List<String> list = new ArrayList<>();
+        list.add(image);
+        System.out.println(image);
+        System.out.println( ResponseEntity.ok()
+                .header("X-Total-Images", "1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(image));
+        System.out.println( ResponseEntity.ok()
+                .header("X-Total-Images", "1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(list));
 
         return ResponseEntity.ok()
                 .header("X-Total-Images", "1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(image);
+                .body(list);
     }
 //    @GetMapping("/getImage2")
 //    public ResponseEntity<?> getAiImage2(@RequestBody AIRequestBody request){

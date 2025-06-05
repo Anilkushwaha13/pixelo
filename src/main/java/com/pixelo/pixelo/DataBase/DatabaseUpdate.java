@@ -4,6 +4,7 @@ import com.pixelo.pixelo.businessLogic.PasswordEncrypter;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Timestamp;
 
 public class DatabaseUpdate {
 
@@ -13,11 +14,12 @@ public class DatabaseUpdate {
         PreparedStatement input = null;
         try {
              con = ConnectionProvider.getCon();
-             String sql = "INSERT into appuser values  (?,?,?)";
+             String sql = "INSERT into appuser values  (?,?,?,?)";
              input = con.prepareStatement(sql);
              input.setString(1,email);
              input.setString(2,Username);
              input.setString(3, PasswordEncrypter.hashPassword(password));
+             input.setString(4, String.valueOf(new Timestamp(System.currentTimeMillis())));
 
             int result = input.executeUpdate();
 

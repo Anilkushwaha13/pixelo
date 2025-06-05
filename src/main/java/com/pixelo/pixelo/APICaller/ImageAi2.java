@@ -16,7 +16,7 @@ public class ImageAi2 {
     //    static final String api_key ="Bearer "+"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";
     static final String api_key ="Bearer "+"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";
 
-    public static List<String> getImage2(String prompt){
+    public static String getImage2(String prompt){
         try {
             List<String> imgdata = new ArrayList<>();
 
@@ -78,15 +78,18 @@ public class ImageAi2 {
                     JSONObject data = new JSONObject(response.toString());
                     if (data.has("artifacts")) {
                         JSONArray artifacts = data.getJSONArray("artifacts");
-                        for (int idx = 0; idx < artifacts.length(); idx++) {
-                            JSONObject imageSDATA = artifacts.getJSONObject(idx);
-                            imgdata.add(imageSDATA.getString("base64"));
-                        }
+//                        for (int idx = 0; idx < artifacts.length(); idx++) {
+                        System.out.println(artifacts);
+                            JSONObject imageSDATA = artifacts.getJSONObject(0);
+                        System.out.println("data:"+" "+artifacts.getJSONObject(0).getString("base64"));
+                            return  imageSDATA.getString("base64");
+//                        }
                     } else {
                         System.out.println("Error:No artifats was found ");
+                        return null;
                     }
                 }
-                return imgdata;
+//                return imgdata;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
